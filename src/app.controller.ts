@@ -4,16 +4,21 @@ import {
   Delete,
   Get,
   HttpCode,
+  Inject,
+  Optional,
   Param,
   Post,
   Put,
   Query,
 } from '@nestjs/common';
 import { AppService } from './app.service';
+import { CarService } from './car/car.service';
 
 @Controller('apps')
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  @Inject()
+  private carService: CarService;
+  constructor(@Optional() private readonly appService: AppService) {}
 
   @Get(':name')
   //@Redirect('https://www.youtube.com/@funofheuristic', 302)
